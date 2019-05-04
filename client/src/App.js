@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage/WelcomePage";
 import LoginPage from "./components/LoginPage/LoginPage";
+import DonationsList from "./components/DonationsList/DonationsList";
 
 class App extends Component {
   constructor() {
@@ -123,20 +124,18 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
-        <h1>Care Portal</h1>
-        <form
-          action="/api/images"
-          method="post"
-          enctype="multipart/form-data"
-          id="addPhoto"
-        >
-          <input type="file" name="image" />
-          <button type="submit" onSubmit={this.handleSubmit}>
-            SAVE
-          </button>
-        </form>
-      </div>
+      <DonationsList
+        donations={[
+          {
+            itemType: "furniture",
+            itemTitle: "Blue Couch",
+            itemDesc: "Only 2 weeks old!!!",
+            img: {},
+            location: {},
+            date: "5/4/19"
+          }
+        ]}
+      />
     );
   }
 }
