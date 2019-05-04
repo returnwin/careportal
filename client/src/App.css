@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -11,6 +11,27 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+} */
+
+body > #root > div {
+  height: 150vh;  
+  background-color: #F9F9F9;
+}
+.App {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 125px 1fr;
+  grid-template-rows: 90px 1fr;
+  background-color: #F9F9F9;
+  /* background-color: #f2e3ea; */
+}
+
+.page{
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  background-color: #F9F9F9;
+  height: 100%;
+  /* height: 100vh;  */
 }
 
 

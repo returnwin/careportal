@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import { FormControl, Button } from 'react-bootstrap';
 import Star from '../Star';
+import './SignUp.css';
 // import NewUserButton from './NewUserButton';
 // import Required from './Required';
 
@@ -44,7 +45,7 @@ class SignUp extends Component{
                     <legend className="signupLegend">CREATE AN ACCOUNT</legend>
                     {/* <Required className='required'/> */}
                     <label className="userFirstName">
-                        First Name<br/>
+                        First Name<Star/><br/>
                         <FormControl
                             type="text"
                             name="firstName"

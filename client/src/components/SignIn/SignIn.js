@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import { FormControl, Button } from 'react-bootstrap';
-import Star from '../Star';
 // import Required from './Required';
+import Star from '../Star';
+import './SignIn.css';
 
-//this is the old login component
 class SignIn extends Component {
     constructor(){
         super();
@@ -30,7 +30,7 @@ class SignIn extends Component {
                     <legend className="loginLegend">SIGN IN</legend>
                     {/* <Required className='required'/> */}
                     <label className="email">
-                        Email Address<br/>
+                        Email Address<Star/><br/>
                         <FormControl
                             type="email"
                             name="username"
@@ -69,3 +69,4 @@ SignIn.propTypes ={
 };
 
 export default SignIn;
+
