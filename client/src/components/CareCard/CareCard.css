@@ -2,10 +2,26 @@
   border: solid 1px black;
   border-radius: 1rem;
   width: 25rem;
-  padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
 }
 .cardTitle {
-  
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  line-height: normal;
+  width: 3.5rem;
+  height: 24px;
+  vertical-align: middle;
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
 }
 
 .cardImg {
