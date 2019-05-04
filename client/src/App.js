@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import donation from './json/donation.json';
+
+import CareCard from './components/CareCard/CareCard';
 
 import NavBar from './components/NavBar/NavBar';
 
@@ -138,6 +141,13 @@ class App extends Component {
           <input type="file" name="image" />
           <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
         </form>
+        <ul>
+          <CareCard 
+            donation={donation}
+          />
+          {/* <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
+          <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} /> */}
+        </ul>
       </div>
 
       <BrowserRouter>
