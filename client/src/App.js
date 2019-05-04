@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import donation from './json/donation.json';
+
+import CareCard from './components/CareCard/CareCard';
+
+import NavBar from './components/NavBar/NavBar';
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
+import { Alert } from 'react-bootstrap';
+
 
 class App extends Component {
   constructor(){
@@ -73,7 +81,6 @@ class App extends Component {
     this.setState({
       authenticated: false
     });
-    // this.props.setCurrentUserId(null);
   }
 
   renderSignUpSignIn() {
@@ -92,6 +99,10 @@ class App extends Component {
       <div className="page">
         <Switch>
           <Route exact path="/" component={WelcomePage}/>
+          {/* <Route 
+            exact path="/" 
+            render={(props)=> <WelcomePage {...props}/>}
+         /> */}
         </Switch>
       </div>
     )
@@ -108,6 +119,13 @@ class App extends Component {
   //   //     this.setState({images: data.images});
   //   // })
   // }
+  renderError(){
+    return(
+        <Alert bsStyle="warning">
+            <strong className="signupsigninerr">{this.props.err}</strong>
+        </Alert>
+    )
+  }
 
   render(){
     let whatToShow = "";
@@ -117,12 +135,44 @@ class App extends Component {
       whatToShow = this.renderSignUpSignIn();
     }
     return (
+      // <BrowserRouter>
+      // <div className="App">
+      //   <NavBar/>
+      //   <h1>Care Portal</h1>
+      //   {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+      //     <input type="file" name="image" />
+      //     <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+      //   </form> */}
+      //   <ul>
+      //     <CareCard 
+      //       donation={donation}
+      //     />
+      //     <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
+      //     <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} />
+      //   </ul>
+      // </div>
+      // </BrowserRouter>
+
       <BrowserRouter>
         <div className="App">
-          <h1>Care Portal</h1>
-          {whatToShow}
+          <NavBar/>
+          <div className="page">
+          {/* <ul>
+          <CareCard 
+            donation={donation}
+          />
+          <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
+          <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} />
+          </ul> */}
+            {whatToShow}
+            {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+              <input type="file" name="image" />
+              <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+            </form> */}
+          </div>
         </div>
       </BrowserRouter>
+
     );
   }
 }

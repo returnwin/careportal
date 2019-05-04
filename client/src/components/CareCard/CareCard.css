@@ -1,0 +1,13 @@
+.cards {
+  border: solid 1px black;
+  border-radius: 1rem;
+  width: 25rem;
+  padding: 1rem;
+}
+.cardTitle {
+  
+}
+
+.cardImg {
+  border-radius: .5rem;
+}
