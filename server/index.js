@@ -48,10 +48,14 @@ const startWebServer = () =>{
     //         return filename
     //     }
     // }))
+    app.get("/api/users/:id", function (req, res){
+        res.send(`${req.user.userId}`)
+      })
 
     app.get('/api/careportal', function(req, res){
         res.send("You got care portal data")
     });
+
     app.post('/api/donations', upload.single('donation'), function (req, res, next) {
         res.send(req.file, req.body)
         // req.file is the `avatar` file
