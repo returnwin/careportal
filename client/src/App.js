@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
+
+import NavBar from './components/NavBar/NavBar';
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import { Alert } from 'react-bootstrap';
+
 
 class App extends Component {
   constructor(){
@@ -126,6 +130,16 @@ class App extends Component {
       whatToShow = this.renderSignUpSignIn();
     }
     return (
+
+      <div className="App">
+        <NavBar/>
+        <h1>Care Portal</h1>
+        <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+          <input type="file" name="image" />
+          <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+        </form>
+      </div>
+
       <BrowserRouter>
         <div className="App">
           <h1>Care Portal</h1>
@@ -138,6 +152,7 @@ class App extends Component {
           </div>
         </div>
       </BrowserRouter>
+
     );
   }
 }
