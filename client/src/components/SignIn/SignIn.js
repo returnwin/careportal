@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import { FormControl, Button } from 'react-bootstrap';
+
 // import Required from './Required';
 import Star from '../Star';
 import './SignIn.css';
@@ -30,6 +31,7 @@ class SignIn extends Component {
                     <legend className="loginLegend">SIGN IN</legend>
                     {/* <Required className='required'/> */}
                     <label className="email">
+
                         Email Address<Star/><br/>
                         <FormControl
                             type="email"
@@ -67,6 +69,7 @@ class SignIn extends Component {
 SignIn.propTypes ={
     onSignIn: PropTypes.func.isRequired
 };
+
 
 export default SignIn;
 
