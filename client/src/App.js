@@ -1,9 +1,17 @@
-import React, { Component } from "react";
-import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import WelcomePage from "./components/WelcomePage/WelcomePage";
-import LoginPage from "./components/LoginPage/LoginPage";
-import DonationsList from "./components/DonationsList/DonationsList";
+
+import React, { Component } from 'react';
+import './App.css';
+import donation from './json/donation.json';
+
+import CareCard from './components/CareCard/CareCard';
+
+import NavBar from './components/NavBar/NavBar';
+
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import WelcomePage from './components/WelcomePage/WelcomePage';
+import LoginPage from './components/LoginPage/LoginPage';
+import { Alert } from 'react-bootstrap';
+
 
 class App extends Component {
   constructor() {
@@ -18,63 +26,60 @@ class App extends Component {
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
+
   }
 
-  handleSignUp(credentials) {
+  handleSignUp(credentials){
     const { username, password, confirmPassword } = credentials;
-    console.log(credentials);
-    if (!username.trim() || !password.trim()) {
+    console.log(credentials)
+    if(!username.trim() || !password.trim()){
       this.setState({
         signUpSignInError: "Must Provide All Fields"
       });
     } else {
       fetch("/api/users", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(credentials)
-      })
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
-          const { token } = data;
-          localStorage.setItem("token", token);
-          this.setState({
-            signUpSignInError: "",
-            authenticated: token
-          });
+      }).then((res)=>{
+        return res.json();
+      }).then((data)=>{
+        const { token } = data;
+        localStorage.setItem("token", token);
+        this.setState({
+          signUpSignInError: "",
+          authenticated: token
         });
+      });
     }
   }
 
   handleSignIn(credentials) {
-    console.log(credentials);
+    console.log(credentials)
     const { username, password } = credentials;
-    if (!username.trim() || !password.trim()) {
+    if (!username.trim() || !password.trim() ) {
       this.setState({
         signUpSignInError: "Must Provide All Fields"
       });
     } else {
       fetch("/api/sessions", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify(credentials)
-      })
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
-          const { token } = data;
-          localStorage.setItem("token", token);
-          this.setState({
-            signUpSignInError: "",
-            authenticated: token
-          });
+      }).then((res) => {
+        return res.json();
+      }).then((data) => {
+        const { token } = data;
+        localStorage.setItem("token", token);
+        this.setState({
+          signUpSignInError: "",
+          authenticated: token
         });
-    }
+      });
+    }  
   }
 
-  handleSignOut(event) {
+  handleSignOut(event){
     localStorage.removeItem("token");
     this.setState({
       authenticated: false
@@ -85,28 +90,81 @@ class App extends Component {
     return (
       <Switch>
         <Route
-          path="/"
-          render={props => (
-            <LoginPage
-              {...props}
-              err={this.state.signUpSignInError}
-              onSignUp={this.handleSignUp}
-              onSignIn={this.handleSignIn}
-              error={this.renderError}
-            />
-          )}
+          path='/'
+          render={(props)=> <LoginPage {...props} err={this.state.signUpSignInError} onSignUp={this.handleSignUp} onSignIn={this.handleSignIn} error={this.renderError}/>}
         />
       </Switch>
     );
   }
 
-  renderApp() {
-    return (
+  renderApp(){
+    return(
       <div className="page">
         <Switch>
-          <Route exact path="/" component={WelcomePage} />
+          <Route exact path="/" component={WelcomePage}/>
         </Switch>
       </div>
+    )
+  }
+
+  renderError(){
+    return(
+        <Alert bsStyle="warning">
+            <strong className="signupsigninerr">{this.props.err}</strong>
+        </Alert>
+    )
+  }
+
+  handleSubmit(e){
+    e.preventDefault();
+    // fetch('/api/images', {
+    //     method: 'POST',
+    //     headers: {'Content-Type':'multipart/form-data'},
+    //     body: new FormData(document.getElementById('addPhoto'))
+    // }).then((response) => response.json())
+    // .then((data)=>{
+    //     this.setState({images: data.images});
+    // })
+  }
+
+  render(){
+    let whatToShow = "";
+    if(this.state.authenticated){
+      whatToShow = this.renderApp();
+    } else {
+      whatToShow = this.renderSignUpSignIn();
+    }
+    return (
+
+      <div className="App">
+        <NavBar/>
+        <h1>Care Portal</h1>
+        <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+          <input type="file" name="image" />
+          <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+        </form>
+        <ul>
+          <CareCard 
+            donation={donation}
+          />
+          {/* <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
+          <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} /> */}
+        </ul>
+      </div>
+
+      <BrowserRouter>
+        <div className="App">
+          <h1>Care Portal</h1>
+          <div className="page">
+            {whatToShow}
+            {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+              <input type="file" name="image" />
+              <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+            </form> */}
+          </div>
+        </div>
+      </BrowserRouter>
+
     );
   }
 
