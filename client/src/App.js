@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
+import { Alert } from 'react-bootstrap';
 
 class App extends Component {
   constructor(){
@@ -74,7 +75,6 @@ class App extends Component {
     this.setState({
       authenticated: false
     });
-    // this.props.setCurrentUserId(null);
   }
 
   renderSignUpSignIn() {
@@ -95,6 +95,14 @@ class App extends Component {
           <Route exact path="/" component={WelcomePage}/>
         </Switch>
       </div>
+    )
+  }
+
+  renderError(){
+    return(
+        <Alert bsStyle="warning">
+            <strong className="signupsigninerr">{this.props.err}</strong>
+        </Alert>
     )
   }
 
@@ -121,11 +129,13 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <h1>Care Portal</h1>
-          {whatToShow}
-          {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
-            <input type="file" name="image" />
-            <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
-          </form> */}
+          <div className="page">
+            {whatToShow}
+            {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+              <input type="file" name="image" />
+              <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+            </form> */}
+          </div>
         </div>
       </BrowserRouter>
     );
