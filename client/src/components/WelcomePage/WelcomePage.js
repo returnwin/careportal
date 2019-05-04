@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import ImageSubmit from '../ImageSubmit/ImageSubmit';
 // import PropTypes from 'prop-types';
 
 class WelcomePage extends Component{
@@ -13,6 +14,7 @@ class WelcomePage extends Component{
         return(
             <div className="welcomepage">
                 Welcome!!!
+                <ImageSubmit/>
             </div>
         )
     }
