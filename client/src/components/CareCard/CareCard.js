@@ -1,6 +1,5 @@
-import React from 'react';
-import './CareCard.css';
-
+import React from "react";
+import "./CareCard.css";
 import { Card, CardText, CardBody, CardTitle, CardLink, CardImg, Badge, Row } from 'reactstrap';
 
 const CareCard = props => {
@@ -22,6 +21,6 @@ const CareCard = props => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default CareCard;

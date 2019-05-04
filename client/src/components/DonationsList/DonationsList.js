@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ListGroup, ListGroupItem, FormGroup, Input } from "reactstrap";
-
-const DonationsItem = props => <div>{props.donation.itemTitle}</div>;
+import CareCard from "../CareCard/CareCard";
 
 class DonationsList extends Component {
   constructor(props) {
@@ -22,7 +21,7 @@ class DonationsList extends Component {
       }
     }
     const results = this.props.donations.filter(donation => {
-      return showTypes.includes(donation.itemType);
+      return showTypes.includes(donation.type);
     });
     return results;
   };
@@ -66,7 +65,7 @@ class DonationsList extends Component {
         <ListGroup>
           {filteredDonations.map((donation, i) => (
             <ListGroupItem key={i}>
-              <DonationsItem donation={donation} key={i} />
+              <CareCard donation={donation} key={i} />
             </ListGroupItem>
           ))}
         </ListGroup>
