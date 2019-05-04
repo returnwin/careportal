@@ -126,6 +126,7 @@ class App extends Component {
           <NavBar/>
           <div className="page">
             {whatToShow}
+            <button onClick={this.handleSignOut}>Log Out</button>
           </div>
         </div>
       </BrowserRouter>
