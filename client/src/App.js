@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import NavBar from './components/NavBar/NavBar';
 
 class App extends Component {
   constructor(){
@@ -25,6 +26,7 @@ class App extends Component {
   render(){
     return (
       <div className="App">
+        <NavBar/>
         <h1>Care Portal</h1>
         <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
           <input type="file" name="image" />

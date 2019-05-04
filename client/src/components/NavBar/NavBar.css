@@ -1,0 +1,21 @@
+Image {
+    height: 170px;
+    width: 180px;
+    text-align: left;
+    display: inline-block;
+    flex-direction: left;
+    padding: 5px;
+    margin: 5px;
+}
+
+.NavBar {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: fit;
+    padding: 10px;
+}
+
