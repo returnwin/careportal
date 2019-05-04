@@ -1,14 +1,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-// import bootstrap css
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
-import donation from './json/donation.json';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-import DonationsList from './components/DonationsList/DonationsList';
-import CareCard from './components/CareCard/CareCard';
 import NavBar from './components/NavBar/NavBar';
 import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
@@ -20,15 +13,14 @@ class App extends Component {
     super();
     this.state = {
       signUpSignInError: "",
-      authenticated: localStorage.getItem("token") || false,
+      authenticated: true,
+      // authenticated: localStorage.getItem("token") || false,
       userId: "",
       images: []
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
-
   }
 
   handleSignUp(credentials){
@@ -69,7 +61,7 @@ class App extends Component {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(credentials)
       }).then((res) => {
-        return res.json();
+        return res.send();
       }).then((data) => {
         const { token } = data;
         localStorage.setItem("token", token);
@@ -109,24 +101,13 @@ class App extends Component {
     )
   }
 
+  
   renderError(){
     return(
         <Alert bsStyle="warning">
             <strong className="signupsigninerr">{this.props.err}</strong>
         </Alert>
     )
-  }
-
-  handleSubmit(e){
-    e.preventDefault();
-    // fetch('/api/images', {
-    //     method: 'POST',
-    //     headers: {'Content-Type':'multipart/form-data'},
-    //     body: new FormData(document.getElementById('addPhoto'))
-    // }).then((response) => response.json())
-    // .then((data)=>{
-    //     this.setState({images: data.images});
-    // })
   }
 
   render(){
@@ -137,67 +118,16 @@ class App extends Component {
       whatToShow = this.renderSignUpSignIn();
     }
     return (
-
-      <div className="App">
-        <NavBar/>
-        <h1>Care Portal</h1>
-        <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
-          <input type="file" name="image" />
-          <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
-        </form>
-        <DonationsList donations={donations}>
-          <CareCard 
-            donation={donation}
-          />
-          {/* <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
-          <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} /> */}
-        </DonationsList>
-      </div>
-
-      // <BrowserRouter>
-      //   <div className="App">
-      //     <h1>Care Portal</h1>
-      //     <div className="page">
-      //       {whatToShow}
-      //       {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
-      //         <input type="file" name="image" />
-      //         <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
-      //       </form> */}
-      //     </div>
-      //   </div>
-      // </BrowserRouter>
-
-    );
+      <BrowserRouter>
+        <div className="App">
+          <NavBar/>
+          <div className="page">
+            {whatToShow}
+          </div>
+        </div>
+      </BrowserRouter>
+    )
   }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    fetch("/api/images", {
-      method: "POST",
-      headers: { "Content-Type": "multipart/form-data" },
-      body: new FormData(document.getElementById("addPhoto"))
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ images: data.images });
-      });
-  }
-  // render() {
-  //   return (
-  //     <DonationsList
-  //       donations={[
-  //         {
-  //           itemType: "furniture",
-  //           itemTitle: "Blue Couch",
-  //           itemDesc: "Only 2 weeks old!!!",
-  //           img: {},
-  //           location: {},
-  //           date: "5/4/19"
-  //         }
-  //       ]}
-  //     />
-  //   );
-  // }
 }
 
 export default App;
