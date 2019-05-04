@@ -1,12 +1,4 @@
-.notificationIcon {
-    border: 2px solid #E36934;
-    border-radius: 5px;
-    font-size: 20px;
+.notificationCounter {
+    left: 0 !important;
 }
 
-.notificationCounter {
-    background-color: #E36934;
-    color: white;
-    border-radius: 5px;
-    padding: 1.5px 5px;
-}

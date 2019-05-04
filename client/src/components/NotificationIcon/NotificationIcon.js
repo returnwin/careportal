@@ -6,7 +6,7 @@ class NotificationIcon extends Component {
     render() {
       return (
         <div>
-          <Button className='notificationIcon'>
+          <Button type='button'>
             {this.props.title}
             <Badge className='notificationCounter'>4</Badge>
           </Button>

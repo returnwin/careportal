@@ -2,8 +2,8 @@ import React from 'react';
 import { Navbar, Nav, NavItem , Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
 import './NavBar.css';
+import NotificationIcon from '../NotificationIcon/NotificationIcon';
 
 const NavBar =(props) => {
     return(
@@ -14,13 +14,17 @@ const NavBar =(props) => {
                 </NavItem>
             </Nav>
             <Nav>
-                <Navbar.Text>Notifications</Navbar.Text>
-            </Nav>
-            <Nav>
                 <Navbar.Text>Donation List</Navbar.Text>
             </Nav>
             <Nav>
                 <Navbar.Text>Add a Donation Item</Navbar.Text>
+            </Nav>
+            <Nav>
+                <Navbar.Text>
+                    <NotificationIcon 
+                        title='Notifications'
+                    />
+                </Navbar.Text>
             </Nav>
             <Nav>
                 <NavItem onClick={props.onSignOut}>Log Out</NavItem>
