@@ -13,4 +13,9 @@
   color: white;
 }
 
+ul {
+  display: flex;
+  justify-content: center;
+}
+
 
