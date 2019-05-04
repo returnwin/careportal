@@ -1,11 +1,25 @@
-import React from 'react';
-import './CareCard.css';
+import React from "react";
+import "./CareCard.css";
 
-import { Card, CardText, CardBody, CardTitle, CardLink, CardImg } from 'reactstrap';
+import {
+  Card,
+  CardText,
+  CardBody,
+  CardTitle,
+  CardLink,
+  CardImg
+} from "reactstrap";
 
 const CareCard = props => {
   // const { donation } = props;
-  const { title, description, cardImg, location, date, socialUrl } = props.donation;
+  const {
+    title,
+    description,
+    cardImg,
+    location,
+    date,
+    socialUrl
+  } = props.donation;
 
   return (
     <Card className="cards pt-2, px-2">
@@ -19,6 +33,6 @@ const CareCard = props => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default CareCard;
