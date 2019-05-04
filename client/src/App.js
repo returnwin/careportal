@@ -2,9 +2,17 @@ import React, { Component } from "react";
 import "./App.css";
 import donation from "./json/donation.json";
 
-import DonationsList from "./components/DonationsList/DonationsList";
-
-import NavBar from "./components/NavBar/NavBar";
+import React, { Component } from 'react';
+import './App.css';
+// import bootstrap css
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import donation from './json/donation.json';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import CareCard from './components/CareCard/CareCard';
+import NavBar from './components/NavBar/NavBar';
+import WelcomePage from './components/WelcomePage/WelcomePage';
+import LoginPage from './components/LoginPage/LoginPage';
+import { Alert } from 'react-bootstrap';
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage/WelcomePage";
@@ -20,7 +28,6 @@ class App extends Component {
       userId: "",
       images: []
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -116,82 +123,46 @@ class App extends Component {
     );
   }
 
-  renderError() {
+  
+  renderError(){
+    return(
+        <Alert bsStyle="warning">
+            <strong className="signupsigninerr">{this.props.err}</strong>
+        </Alert>
+    )
+  }
+
+  render(){
+    let whatToShow = "";
+    if(this.state.authenticated){
+      whatToShow = this.renderApp();
+    } else {
+      whatToShow = this.renderSignUpSignIn();
+    }
     return (
-      <Alert bsStyle="warning">
-        <strong className="signupsigninerr">{this.props.err}</strong>
-      </Alert>
-    );
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    // fetch('/api/images', {
-    //     method: 'POST',
-    //     headers: {'Content-Type':'multipart/form-data'},
-    //     body: new FormData(document.getElementById('addPhoto'))
-    // }).then((response) => response.json())
-    // .then((data)=>{
-    //     this.setState({images: data.images});
-    // })
-  }
-
-  // render(){
-  //   let whatToShow = "";
-  //   if(this.state.authenticated){
-  //     whatToShow = this.renderApp();
-  //   } else {
-  //     whatToShow = this.renderSignUpSignIn();
-  //   }
-  //   return (
-
-  //     <div className="App">
-  //       <NavBar/>
-  //       <h1>Care Portal</h1>
-  //       <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto">
-  //         <input type="file" name="image" />
-  //         <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
-  //       </form>
-  //       <ul>
-  //         <CareCard
-  //           donation={donation}
-  //         />
-  //         {/* <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
-  //         <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} /> */}
-  //       </ul>
-  //     </div>
-
-  //     <BrowserRouter>
-  //       <div className="App">
-  //         <h1>Care Portal</h1>
-  //         <div className="page">
-  //           {whatToShow}
-  //           {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto">
-  //             <input type="file" name="image" />
-  //             <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
-  //           </form> */}
-  //         </div>
-  //       </div>
-  //     </BrowserRouter>
-
-  //   );
-  // }
-
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   fetch("/api/images", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "multipart/form-data" },
-  //     body: new FormData(document.getElementById("addPhoto"))
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       this.setState({ images: data.images });
-  //     });
-  // }
-  render() {
-    return <DonationsList donations={[donation]} />;
+      <BrowserRouter>
+        <div className="App">
+          <NavBar/>
+          <div className="page">
+            {whatToShow}
+          </div>
+        </div>
+      </BrowserRouter>
+    )
   }
 }
 
 export default App;
+
+//       <DonationsList
+//         donations={[
+//           {
+//             itemType: "furniture",
+//             itemTitle: "Blue Couch",
+//             itemDesc: "Only 2 weeks old!!!",
+//             img: {},
+//             location: {},
+//             date: "5/4/19"
+//           }
+//         ]}
+//       />
