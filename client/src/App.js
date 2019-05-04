@@ -7,6 +7,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import donation from './json/donation.json';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import DonationsList from './components/DonationsList/DonationsList';
 import CareCard from './components/CareCard/CareCard';
 import NavBar from './components/NavBar/NavBar';
 import WelcomePage from './components/WelcomePage/WelcomePage';
@@ -144,13 +145,13 @@ class App extends Component {
           <input type="file" name="image" />
           <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
         </form>
-        <ul>
+        <DonationsList donations={donations}>
           <CareCard 
             donation={donation}
           />
           {/* <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
           <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} /> */}
-        </ul>
+        </DonationsList>
       </div>
 
       // <BrowserRouter>
@@ -181,22 +182,22 @@ class App extends Component {
         this.setState({ images: data.images });
       });
   }
-  render() {
-    return (
-      <DonationsList
-        donations={[
-          {
-            itemType: "furniture",
-            itemTitle: "Blue Couch",
-            itemDesc: "Only 2 weeks old!!!",
-            img: {},
-            location: {},
-            date: "5/4/19"
-          }
-        ]}
-      />
-    );
-  }
+  // render() {
+  //   return (
+  //     <DonationsList
+  //       donations={[
+  //         {
+  //           itemType: "furniture",
+  //           itemTitle: "Blue Couch",
+  //           itemDesc: "Only 2 weeks old!!!",
+  //           img: {},
+  //           location: {},
+  //           date: "5/4/19"
+  //         }
+  //       ]}
+  //     />
+  //   );
+  // }
 }
 
 export default App;
