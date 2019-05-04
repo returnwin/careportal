@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import NotificationIcon from './components/NotificationIcon/NotificationIcon';
 
 class App extends Component {
   constructor(){
@@ -25,6 +26,9 @@ class App extends Component {
   render(){
     return (
       <div className="App">
+      <NotificationIcon
+        title='Notifications'
+      />
         <h1>Care Portal</h1>
         <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
           <input type="file" name="image" />
