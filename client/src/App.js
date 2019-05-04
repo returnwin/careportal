@@ -23,7 +23,6 @@ class App extends Component {
       userId: "",
       images: []
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -103,29 +102,32 @@ class App extends Component {
       <div className="page">
         <Switch>
           <Route exact path="/" component={WelcomePage}/>
+          {/* <Route 
+            exact path="/" 
+            render={(props)=> <WelcomePage {...props}/>}
+         /> */}
         </Switch>
       </div>
     )
   }
 
+  // handleSubmit(e){
+  //   e.preventDefault();
+  //   // fetch('/api/images', {
+  //   //     method: 'POST',
+  //   //     headers: {'Content-Type':'multipart/form-data'},
+  //   //     body: new FormData(document.getElementById('addPhoto'))
+  //   // }).then((response) => response.json())
+  //   // .then((data)=>{
+  //   //     this.setState({images: data.images});
+  //   // })
+  // }
   renderError(){
     return(
         <Alert bsStyle="warning">
             <strong className="signupsigninerr">{this.props.err}</strong>
         </Alert>
     )
-  }
-
-  handleSubmit(e){
-    e.preventDefault();
-    // fetch('/api/images', {
-    //     method: 'POST',
-    //     headers: {'Content-Type':'multipart/form-data'},
-    //     body: new FormData(document.getElementById('addPhoto'))
-    // }).then((response) => response.json())
-    // .then((data)=>{
-    //     this.setState({images: data.images});
-    // })
   }
 
   render(){
@@ -136,23 +138,43 @@ class App extends Component {
       whatToShow = this.renderSignUpSignIn();
     }
     return (
+      // <BrowserRouter>
+      // <div className="App">
+      //   <NavBar/>
+      //   <h1>Care Portal</h1>
+      //   {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+      //     <input type="file" name="image" />
+      //     <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+      //   </form> */}
+      //   <ul>
+      //     <CareCard 
+      //       donation={donation}
+      //     />
+      //     <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
+      //     <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} />
+      //   </ul>
+      // </div>
+      // </BrowserRouter>
 
-      <div className="App">
-        <NavBar/>
-        <h1>Care Portal</h1>
-        <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
-          <input type="file" name="image" />
-          <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
-        </form>
-        <ul>
+      <BrowserRouter>
+        <div className="App">
+          <NavBar/>
+          <div className="page">
+          {/* <ul>
           <CareCard 
             donation={donation}
           />
-          {/* <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
-          <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} /> */}
-        </ul>
-      </div>
-
+          <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
+          <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} />
+          </ul> */}
+            {whatToShow}
+            {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+              <input type="file" name="image" />
+              <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+            </form> */}
+          </div>
+        </div>
+      </BrowserRouter>
       // <BrowserRouter>
       //   <div className="App">
       //     <h1>Care Portal</h1>
@@ -166,37 +188,17 @@ class App extends Component {
       //   </div>
       // </BrowserRouter>
 
-    );
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    fetch("/api/images", {
-      method: "POST",
-      headers: { "Content-Type": "multipart/form-data" },
-      body: new FormData(document.getElementById("addPhoto"))
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ images: data.images });
-      });
-  }
-  render() {
-    return (
-      <DonationsList
-        donations={[
-          {
-            itemType: "furniture",
-            itemTitle: "Blue Couch",
-            itemDesc: "Only 2 weeks old!!!",
-            img: {},
-            location: {},
-            date: "5/4/19"
-          }
-        ]}
-      />
-    );
-  }
-}
+//       <DonationsList
+//         donations={[
+//           {
+//             itemType: "furniture",
+//             itemTitle: "Blue Couch",
+//             itemDesc: "Only 2 weeks old!!!",
+//             img: {},
+//             location: {},
+//             date: "5/4/19"
+//           }
+//         ]}
+//       />
 
 export default App;
