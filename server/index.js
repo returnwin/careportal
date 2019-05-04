@@ -7,6 +7,9 @@ var upload = multer({ dest: 'uploads/' })
 // const upload = multer({ dest: 'uploads/' })
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const userRoutes = require("./routes/UserRoutes");
+const sessionRoutes = require("./routes/SessionRoutes");
+const authenticationRoutes = require("./routes/AuthenticationRoutes");
 const photoRoutes = require("./routes/PhotoRoutes");
 
 mongoose.set('debug', true);
@@ -28,6 +31,9 @@ const startWebServer = () =>{
     app.use(express.static('public'));
     app.use(bodyParser.json());
     app.use(photoRoutes);
+    app.use(userRoutes);
+    app.use(sessionRoutes);
+    app.use(authenticationRoutes);
 
     //takes a photo and puts it in a folder called uploads, so you can easily access it later
     // app.post('/profile', upload.single('photo'), function (req, res, next) {
@@ -58,7 +64,7 @@ const startWebServer = () =>{
         res.sendFile(path.join(__dirname + '/public/index.html'));
     });
 
-    const port = process.env.PORT || 3002;
+    const port = process.env.PORT || 3001;
     app.listen(port, (err) => {
         if (err) {
             return console.log('ERROR: ', err)

@@ -8,12 +8,11 @@ const CareCard = props => {
   const { title, description, cardImg, location, date, socialUrl } = props.donation;
 
   return (
-    <Card className="cards">
-      {cardImg}
+    <Card className="cards pt-2, px-2">
       <CardBody>
         <CardTitle className="cardTitle">{title}</CardTitle>
         <CardText className="cardText">{description}</CardText>
-        <CardImg src={cardImg} alt="strings" width="100%" />
+        <CardImg className="cardImg" src={cardImg} alt="item" width="100%" />
         <CardText className="cardText">location: {location}</CardText>
         <CardText className="cardText">{date}</CardText>
         <CardText className="cardText">{socialUrl}</CardText>
