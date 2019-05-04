@@ -1,19 +1,21 @@
+
 import React, { Component } from 'react';
 import './App.css';
+// import bootstrap css
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 import donation from './json/donation.json';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import CareCard from './components/CareCard/CareCard';
-
 import NavBar from './components/NavBar/NavBar';
-
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import { Alert } from 'react-bootstrap';
 
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       signUpSignInError: "",
@@ -24,6 +26,7 @@ class App extends Component {
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
+
   }
 
   handleSignUp(credentials){
@@ -172,9 +175,30 @@ class App extends Component {
           </div>
         </div>
       </BrowserRouter>
+      // <BrowserRouter>
+      //   <div className="App">
+      //     <h1>Care Portal</h1>
+      //     <div className="page">
+      //       {whatToShow}
+      //       {/* <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
+      //         <input type="file" name="image" />
+      //         <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
+      //       </form> */}
+      //     </div>
+      //   </div>
+      // </BrowserRouter>
 
-    );
-  }
-}
+//       <DonationsList
+//         donations={[
+//           {
+//             itemType: "furniture",
+//             itemTitle: "Blue Couch",
+//             itemDesc: "Only 2 weeks old!!!",
+//             img: {},
+//             location: {},
+//             date: "5/4/19"
+//           }
+//         ]}
+//       />
 
 export default App;
