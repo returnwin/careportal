@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import PropTypes from 'prop-types';
 import SignIn from '../SignIn/SignIn';
 import SignUp from '../SignUp/SignUp';
+
 import { Alert } from 'react-bootstrap';
 import './LoginPage.css';
 

@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import './App.css';
 // import bootstrap css
@@ -14,7 +15,7 @@ import { Alert } from 'react-bootstrap';
 
 
 class App extends Component {
-  constructor(){
+  constructor() {
     super();
     this.state = {
       signUpSignInError: "",
@@ -26,6 +27,7 @@ class App extends Component {
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
+
   }
 
   handleSignUp(credentials){
@@ -164,6 +166,35 @@ class App extends Component {
       //   </div>
       // </BrowserRouter>
 
+    );
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    fetch("/api/images", {
+      method: "POST",
+      headers: { "Content-Type": "multipart/form-data" },
+      body: new FormData(document.getElementById("addPhoto"))
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ images: data.images });
+      });
+  }
+  render() {
+    return (
+      <DonationsList
+        donations={[
+          {
+            itemType: "furniture",
+            itemTitle: "Blue Couch",
+            itemDesc: "Only 2 weeks old!!!",
+            img: {},
+            location: {},
+            date: "5/4/19"
+          }
+        ]}
+      />
     );
   }
 }
