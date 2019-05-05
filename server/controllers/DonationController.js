@@ -1,19 +1,9 @@
 const DonationModel = require("../models/DonationModel");
 
 module.exports.list = (req, res)=>{
-    DonationModel.find({ userId: req.user._id }).exec().then((students)=>{
-        return res.json(students)
+    DonationModel.find({}).exec().then((donations)=>{
+        return res.json(donations)
     })
-}
-
-module.exports.getUserDonations = (req, res) => {
-    DontainModel.find({
-        userId: req.params.userId
-    })
-    .exec()
-    .then(donations => {
-        return res.json(donations);
-    });
 }
 
 module.exports.show = (req, res)=>{
@@ -31,9 +21,9 @@ module.exports.create = (req, res)=>{
         itemType: req.body.itemType,
         itemTitle: req.body.itemTitle,
         itemDesc: req.body.itemDesc,
-        image: req.body.image
     });
     d.save().then(savedDonation =>{
+        console.log("savedDonation:", savedDonation)
         return res.json(savedDonation)
     })
 }

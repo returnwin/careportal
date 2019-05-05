@@ -98,7 +98,11 @@ class App extends Component {
     return(
       <div className="page">
         <Switch>
-          <Route exact path="/" component={WelcomePage}/>
+          <Route 
+          exact path="/" 
+          render={(props)=><WelcomePage token={this.state.authenticated}/>}
+          // component={WelcomePage}/>
+          />
         </Switch>
       </div>
     )
@@ -123,10 +127,9 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar/>
+          <NavBar onSignOut={this.handleSignOut}/>
           <div className="page">
             {whatToShow}
-            <button onClick={this.handleSignOut}>Log Out</button>
           </div>
         </div>
       </BrowserRouter>

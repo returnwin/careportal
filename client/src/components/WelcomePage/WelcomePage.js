@@ -8,9 +8,13 @@ import donation from '../../json/donation.json';
 class WelcomePage extends Component{
     constructor(props){
         super(props);
+        this.state = {
+            token: this.props.token
+        }
     }
 
     render(){
+        console.log(this.state.token)
         return(
             <div className="welcomepage">
                 {/* <ul>
@@ -20,7 +24,7 @@ class WelcomePage extends Component{
                     <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
                     <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} />
                 </ul> */}
-                <DonationForm/>
+                <DonationForm token={this.state.token}/>
                 {/* <ImageSubmit/> */}
             </div>
         )
