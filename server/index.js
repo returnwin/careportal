@@ -1,9 +1,9 @@
 const path = require('path');
-const fs = require('fs');
+// const fs = require('fs');
 require('dotenv').config();
 const express = require('express');
-const multer = require('multer');
-var upload = multer({ dest: 'uploads/' })
+// const multer = require('multer');
+// var upload = multer({ dest: 'uploads/' })
 // const upload = multer({ dest: 'uploads/' })
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -11,6 +11,7 @@ const userRoutes = require("./routes/UserRoutes");
 const sessionRoutes = require("./routes/SessionRoutes");
 const authenticationRoutes = require("./routes/AuthenticationRoutes");
 const donationRoutes = require("./routes/DonationRoutes");
+const itemRoutes = require("./routes/ItemRoutes");
 // const photoRoutes = require("./routes/PhotoRoutes");
 
 mongoose.set('debug', true);
@@ -29,14 +30,19 @@ mongoose.connect(process.env.MONGODBURI).then(
 const startWebServer = () =>{
     //not secure
     const app = express();
-    app.use(express.static('public'));
+    
+    app.get("/api/publicinformation", function (req, res) {
+        res.send("Anyone can see this");
+    });
+
+    // app.use(express.static('public'));
     app.use(bodyParser.json());
     // app.use(photoRoutes);
     app.use(userRoutes);
     app.use(sessionRoutes);
     app.use(authenticationRoutes);
     app.use(donationRoutes);
-
+    app.use(itemRoutes);
     //takes a photo and puts it in a folder called uploads, so you can easily access it later
     // app.post('/profile', upload.single('photo'), function (req, res, next) {
 
@@ -48,15 +54,25 @@ const startWebServer = () =>{
     //         return filename
     //     }
     // }))
+    app.get("/api/canigetthis", function (req, res) {
+        res.send("You got the data. You are authenticated");
+      });
+    app.get("/api/hey", function (req, res){
+        res.send(`${req.user._id}`)
+    })
 
     app.get('/api/careportal', function(req, res){
         res.send("You got care portal data")
     });
-    app.post('/api/donations', upload.single('donation'), function (req, res, next) {
-        res.send(req.file, req.body)
-        // req.file is the `avatar` file
-        // req.body will hold the text fields, if there were any
-    })
+    // app.get('/api/donations', function(req, res){
+    //     res.send(req.body)
+    // });
+
+    // app.post('/api/donations', upload.single('donation'), function (req, res, next) {
+    //     res.send(req.file, req.body)
+    //     // req.file is the `avatar` file
+    //     // req.body will hold the text fields, if there were any
+    // })
       
     // app.post('/donations', upload.single('photo'), function (req, res, next) {
     //     // req.file is the `avatar` file
@@ -68,11 +84,11 @@ const startWebServer = () =>{
     //     },
     // }));
 
-    app.get('*', function(req, res){
+    app.get('*', function(req, res) {
         res.sendFile(path.join(__dirname + '/public/index.html'));
     });
 
-    const port = process.env.PORT || 3001;
+    const port = process.env.PORT || 3002;
     app.listen(port, (err) => {
         if (err) {
             return console.log('ERROR: ', err)

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar/NavBar';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import WelcomePage from "./components/WelcomePage/WelcomePage";
-import LoginPage from "./components/LoginPage/LoginPage";
-import { Alert } from "react-bootstrap";
+import WelcomePage from './components/WelcomePage/WelcomePage';
+import LoginPage from './components/LoginPage/LoginPage';
+import { Alert } from 'react-bootstrap';
+
+// import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   constructor() {
@@ -106,7 +107,11 @@ class App extends Component {
     return (
       <div className="page">
         <Switch>
-          <Route exact path="/" component={WelcomePage} />
+          <Route 
+          exact path="/" 
+          render={(props)=><WelcomePage token={this.state.authenticated}/>}
+          // component={WelcomePage}/>
+          />
         </Switch>
       </div>
     );
@@ -131,7 +136,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <NavBar/>
+          <NavBar onSignOut={this.handleSignOut}/>
           <div className="page">
             {whatToShow}
           </div>
