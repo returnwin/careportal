@@ -20,6 +20,7 @@ function create(req, res, next) {
     }
     console.log("This username is free to use");
     saveUser(firstName, lastName, username,password,(token) => {
+      console.log("TOKEN:",res.json(token))
       res.json(token);
     });
   })

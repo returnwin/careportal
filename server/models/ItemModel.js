@@ -15,10 +15,10 @@ const locationSchema = new Schema({
         type: String
     }
 })
-const donationSchema = new Schema({
-    userId: {
-        type: String
-    },
+const itemSchema = new Schema({
+    // userId: {
+    //     type: String
+    // },
     name: {
         type: String
     },
@@ -34,12 +34,8 @@ const donationSchema = new Schema({
     },
     itemDesc: {
         type: String
-    },
-    img: {
-        data: Buffer,
-        contentType: String
     }
 })
 
 
-module.exports = mongoose.model("Donation", donationSchema);
+module.exports = mongoose.model("Item", itemSchema);

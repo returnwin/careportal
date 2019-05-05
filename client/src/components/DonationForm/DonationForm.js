@@ -6,59 +6,57 @@ class DonationForm extends Component{
     constructor(){
         super();
         this.state = {
+            userId: "",
             name: "",
-            location: {
-                street: "",
-                city: "",
-                state: "",
-                zip: ""
-            },
+            location: [
+                {street: ""},
+                {city: ""},
+                {state: ""},
+                {zip: ""}
+            ],
             category: "",
             title: "",
             desc: "",
-            images: []
+            donations: []
         }
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleZipChange = this.handleZipChange.bind(this);
-        this.handleCityChange = this.handleCityChange.bind(this);
-        this.handleCategoryChange = this.handleCategoryChange.bind(this);
-        this.handleTitleChange = this.handleTitleChange.bind(this);
-        this.handleDescChange = this.handleDescChange.bind(this);
-        this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
-    handleNameChange(e){
-        this.setState({name: e.target.value});
-    }
-    handleZipChange(e){
-        this.setState({zip: e.target.value});
-    }
-    handleCityChange(e){
-        this.setState({city: e.target.value});
-    }
-    handleCategoryChange(e){
-        this.setState({category: e.target.value});
-    }
-    handleTitleChange(e){
-        this.setState({title: e.target.value});
-    }
-    handleDescChange(e){
-        this.setState({desc: e.target.value});
+    componentDidMount(){
+        console.log(this.props.token)
+        const token = this.props.token;
+        fetch('/api/donations', {
+        headers: {
+            Authorization: token
+        }
+        })
+        .then(res => res.json())
+        .then(donations => this.setState({ donations }))
     }
     handleFormSubmit(e){
         e.preventDefault();
+        const userId = this.state.userId;
+        console.log("userId:", userId)
         const name = this.state.name;
-        const street = "";
-        const city = this.state.location.city;
-        const state = "TX";
-        const zip = this.state.location.zip;
-        const location = { street, city, state, zip }
+        const date = Date.now();
+        // console.log("date:", date)
+        const stringDate = date.toString();
+        const location = [ 
+            {street: this.state.street},
+            {city: this.state.city},
+            {state: this.state.state},
+            {zip: this.state.zip}
+        ]
+        console.log("location:", location)
         const itemType = this.state.category;
+        console.log("itemType:", itemType)
         const itemTitle = this.state.title;
+        console.log("itemTitle:", itemTitle)
         const itemDesc = this.state.desc;
+        console.log("itemDesc:", itemDesc)
+        const token = this.props.token;
         let options = {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ name, city, location, itemType, itemTitle, itemDesc })
+            headers: {"Content-type": "application/json; charset=UTF-8","Authorization": `${token}`},
+            body: JSON.stringify({name, location, itemType, itemTitle, itemDesc})
         }
         fetch("/api/donations", options).then((res)=>{
             return res.json()
@@ -70,15 +68,29 @@ class DonationForm extends Component{
     }
     render(){
         return(
-            <Form className="donationForm" onSubmit={this.handleFormSubmit}>
+            <form className="donationForm" onSubmit={this.handleFormSubmit.bind(this)}>
                 <FormGroup id='formName'>
                     <Label className="donationForm-name">Name:</Label>{' '}
                     <Input 
                         type="text" 
                         placeholder="Jane Doe" 
                         name="name" 
-                        onChange={this.handleNameChange}
+                        onChange={e=>{
+                            this.setState({[e.target.name]: e.target.value});
+                        }}
                         value={this.state.name}
+                    />
+                </FormGroup>
+                <FormGroup id='formStreet'>
+                    <Label className="donationForm-street">Street Address:</Label>{' '}
+                    <Input 
+                        type="text" 
+                        placeholder="Jane Doe" 
+                        name="street" 
+                        onChange={e=>{
+                            this.setState({[e.target.street]: e.target.value});
+                        }}
+                        value={this.state.street}
                     />
                 </FormGroup>
                 <FormGroup id='formCity'>
@@ -87,8 +99,22 @@ class DonationForm extends Component{
                         type="text" 
                         placeholder="Jane Doe" 
                         name="city" 
-                        onChange={this.handleCityChange}
-                        value={this.state.location.city}
+                        onChange={e=>{
+                            this.setState({[e.target.city]: e.target.value});
+                        }}
+                        value={this.state.city}
+                    />
+                </FormGroup>
+                <FormGroup id='formCity'>
+                    <Label className="donationForm-city">State:</Label>{' '}
+                    <Input 
+                        type="text" 
+                        placeholder="Jane Doe" 
+                        name="state" 
+                        onChange={e=>{
+                            this.setState({[e.target.state]: e.target.value});
+                        }}
+                        value={this.state.state}
                     />
                 </FormGroup>
                 <FormGroup id="formZip">
@@ -97,8 +123,10 @@ class DonationForm extends Component{
                         type="text" 
                         placeholder="Jane Doe" 
                         name="zip" 
-                        onChange={this.handleZipChange}
-                        value={this.state.location.zip}
+                        onChange={e=>{
+                            this.setState({[e.target.zip]: e.target.value});
+                        }}
+                        value={this.state.zip}
                     />
                 </FormGroup>
                 <FormGroup id='formCategories'>
@@ -107,7 +135,9 @@ class DonationForm extends Component{
                         type="text" 
                         placeholder="Jane Doe" 
                         name="category" 
-                        onChange={this.handleCategoryChange}
+                        onChange={e=>{
+                            this.setState({[e.target.name]: e.target.value});
+                        }}
                         value={this.state.category}
                     />
                 </FormGroup>
@@ -117,7 +147,9 @@ class DonationForm extends Component{
                         type="text" 
                         placeholder="Jane Doe" 
                         name="title" 
-                        onChange={this.handleTitleChange}
+                        onChange={e=>{
+                            this.setState({[e.target.name]: e.target.value});
+                        }}
                         value={this.state.title}
                     />
                 </FormGroup>
@@ -127,19 +159,21 @@ class DonationForm extends Component{
                         type="text" 
                         placeholder="Jane Doe" 
                         name="desc" 
-                        onChange={this.handleDescChange}
+                        onChange={e=>{
+                            this.setState({[e.target.name]: e.target.value});
+                        }}
                         value={this.state.desc}
                     />
                 </FormGroup>
-                <FormGroup>
+                {/* <FormGroup>
                     <Label for="exampleFile">File</Label>
                     <Input type="file" name="file" id="exampleFile" />
                     <FormText color="muted">
                         Upload an Image
                     </FormText>
-                </FormGroup>
+                </FormGroup> */}
                 <Button type="submit">Submit</Button>
-            </Form>
+            </form>
             // <div className="donation-form">
             //     <form action="/api/donations" method="post" encType="multipart/form-data" id="addPhoto"> 
             //         <input type="file" name="donation" />
