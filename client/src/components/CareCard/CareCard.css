@@ -2,7 +2,8 @@
   border: solid 1px black;
   border-radius: 1rem;
   width: 25rem;
-  padding: 0 1rem 1rem 1rem;
+  padding: 1rem 1rem 1rem 1rem;
+  margin-top: 2rem;
 }
 .cardTitle {
   font-weight: 600;
@@ -11,12 +12,16 @@
 .badge {
   display: inline-block;
   position: absolute;
-  left: 20px;
-  top: 20px;
+  left: 5px;
+  top: 5px;
   line-height: normal;
   width: 3.5rem;
   height: 24px;
   vertical-align: middle;
+}
+
+.card-body {
+  position: relative;
 }
 
 .card-header {

@@ -1,0 +1,13 @@
+.donations-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  align-items: center;
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+  margin: auto;
+}

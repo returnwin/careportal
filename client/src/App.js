@@ -1,30 +1,20 @@
-// import React, { Component } from "react";
-// import "./App.css";
-// import donation from "./json/donation.json";
-
 import React, { Component } from 'react';
 import './App.css';
-// import bootstrap css
-// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import donation from './json/donation.json';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import CareCard from './components/CareCard/CareCard';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar/NavBar';
 import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import { Alert } from 'react-bootstrap';
 
 // import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import WelcomePage from "./components/WelcomePage/WelcomePage";
-// import LoginPage from "./components/LoginPage/LoginPage";
-// import { Alert } from "react-bootstrap";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       signUpSignInError: "",
-      authenticated: localStorage.getItem("token") || false,
+      authenticated: true,
+      // authenticated: localStorage.getItem("token") || false,
       userId: "",
       images: []
     };
@@ -157,16 +147,3 @@ class App extends Component {
 }
 
 export default App;
-
-//       <DonationsList
-//         donations={[
-//           {
-//             itemType: "furniture",
-//             itemTitle: "Blue Couch",
-//             itemDesc: "Only 2 weeks old!!!",
-//             img: {},
-//             location: {},
-//             date: "5/4/19"
-//           }
-//         ]}
-//       />

@@ -1,4 +1,7 @@
 import React, {Component} from "react";
+import ImageSubmit from '../ImageSubmit/ImageSubmit';
+import DonationList from '../DonationsList/DonationsList';
+import donations from '../../json/donations.json';
 // import ImageSubmit from '../ImageSubmit/ImageSubmit';
 import DonationForm from '../DonationForm/DonationForm';
 import CareCard from '../CareCard/CareCard';
@@ -17,13 +20,10 @@ class WelcomePage extends Component{
         console.log(this.state.token)
         return(
             <div className="welcomepage">
-                {/* <ul>
-                    <CareCard 
-                        donation={donation}
-                    />
-                    <CareCard title={'Food in Round Rock'} description={'lorem ipsum'} />
-                    <CareCard title={'Bedframe in Round Rock'} description={'lorem ipsum'} />
-                </ul> */}
+                <DonationList
+                    donations={donations}
+                >
+                </DonationList>
                 <DonationForm token={this.state.token}/>
                 {/* <ImageSubmit/> */}
             </div>
