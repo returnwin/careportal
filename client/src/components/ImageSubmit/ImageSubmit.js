@@ -1,19 +1,19 @@
 import React, {Component} from "react";
-import PropTypes from 'prop-types';
 import { FormGroup, Label, Input, FormText} from 'reactstrap';
+import './ImageSubmit.css';
 
 class ImageSubmit extends Component{
-    constructor(){
+    constructor() {
         super();
         this.state = {
             images: []
         }
     }
-    render(){
-        return(
-            <FormGroup>
+    render() {
+        return (
+            <FormGroup className="image-submit">
                 <Label for="exampleFile">File</Label>
-                <Input type="file" name="file" id="exampleFile" />
+                <Input className="input" type="file" name="file" id="exampleFile" />
                 <FormText color="muted">
                     Upload an Image
                 </FormText>

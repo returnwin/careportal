@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import ImageSubmit from '../ImageSubmit/ImageSubmit';
-import CareCard from '../CareCard/CareCard';
-import DonationList from '../DonationList/DonationList';
-import donation from '../../json/donation.json';
+import DonationList from '../DonationsList/DonationsList';
+import donations from '../../json/donations.json';
 // import PropTypes from 'prop-types';
 
 class WelcomePage extends Component{

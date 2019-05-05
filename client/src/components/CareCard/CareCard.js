@@ -1,15 +1,14 @@
-import React from 'react';
-import './CareCard.css';
-
-import { Card, CardText, CardBody, CardTitle, CardLink, CardImg, Badge, Row } from 'reactstrap';
+import React from "react";
+import "./CareCard.css";
+import { Card, CardText, CardBody, CardTitle, CardLink, CardImg, Badge } from 'reactstrap';
 
 const CareCard = props => {
   // const { donation } = props;
   const { title, description, cardImg, location, date, socialUrl, label } = props.donation;
 
   return (
-    <Card className="cards pt-2, px-2">
-      <CardBody className="no-padding">
+    <Card className="cards">
+      <CardBody className="card-body no-padding">
         <Badge className="badge" color={"primary"}>{label}</Badge>
           <CardTitle className="cardTitle">{title}</CardTitle>
         
@@ -22,6 +21,6 @@ const CareCard = props => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default CareCard;

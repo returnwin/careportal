@@ -1,0 +1,11 @@
+.image-submit {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  width: 30rem;
+}
+
+.input {
+  width: 15rem;
+}
