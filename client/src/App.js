@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react';
 import './App.css';
-<<<<<<< HEAD
+
 import NotificationIcon from './components/NotificationIcon/NotificationIcon';
-=======
+
 // import bootstrap css
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,7 +16,7 @@ import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import { Alert } from 'react-bootstrap';
 
->>>>>>> b8614e3acc4e9570c1898d59b33c88b82c117eac
+
 
 class App extends Component {
   constructor() {
@@ -92,25 +92,16 @@ class App extends Component {
 
   renderSignUpSignIn() {
     return (
-<<<<<<< HEAD
+
       <div className="App">
-      <NotificationIcon
-        title='Notifications'
-      />
-        <h1>Care Portal</h1>
-        <form action="/api/images" method="post" enctype="multipart/form-data" id="addPhoto"> 
-          <input type="file" name="image" />
-          <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
-        </form>
-      </div>
-=======
-      <Switch>
+        <Switch>
         <Route
           path='/'
           render={(props)=> <LoginPage {...props} err={this.state.signUpSignInError} onSignUp={this.handleSignUp} onSignIn={this.handleSignIn} error={this.renderError}/>}
         />
-      </Switch>
->>>>>>> b8614e3acc4e9570c1898d59b33c88b82c117eac
+      </Switch>  
+      </div>
+
     );
   }
 
@@ -217,5 +208,8 @@ class App extends Component {
 //           }
 //         ]}
 //       />
+    )
+  }
+}
 
 export default App;

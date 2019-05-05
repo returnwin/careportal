@@ -6,15 +6,11 @@
     "bootstrap": "^4.3.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-<<<<<<< HEAD
     "react-avatar-uploader": "^1.0.3",
-    "react-dom": "^16.8.6",
-=======
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
->>>>>>> b8614e3acc4e9570c1898d59b33c88b82c117eac
     "react-scripts": "3.0.0",
     "reactstrap": "^8.0.0"
   },
