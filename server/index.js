@@ -1,18 +1,15 @@
 const path = require('path');
-// const fs = require('fs');
+const fs = require('fs');
 require('dotenv').config();
 const express = require('express');
-// const multer = require('multer');
-// var upload = multer({ dest: 'uploads/' })
-// const upload = multer({ dest: 'uploads/' })
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const userRoutes = require("./routes/UserRoutes");
 const sessionRoutes = require("./routes/SessionRoutes");
 const authenticationRoutes = require("./routes/AuthenticationRoutes");
 const donationRoutes = require("./routes/DonationRoutes");
-const itemRoutes = require("./routes/ItemRoutes");
-// const photoRoutes = require("./routes/PhotoRoutes");
+const DonationModel = require('./models/DonationModel');
+
 
 mongoose.set('debug', true);
 mongoose.Promise = global.Promise;
@@ -35,55 +32,51 @@ const startWebServer = () =>{
         res.send("Anyone can see this");
     });
 
-    // app.use(express.static('public'));
     app.use(bodyParser.json());
-    // app.use(photoRoutes);
     app.use(userRoutes);
     app.use(sessionRoutes);
     app.use(authenticationRoutes);
     app.use(donationRoutes);
-    app.use(itemRoutes);
-    //takes a photo and puts it in a folder called uploads, so you can easily access it later
-    // app.post('/profile', upload.single('photo'), function (req, res, next) {
+//     const multer = require("multer");
+// const cloudinary = require("cloudinary");
+// const cloudinaryStorage = require("multer-storage-cloudinary");
 
-    //     // req.file is the `photo` file
-    //     // req.body will hold the text fields, if there were any
-    // })
-    // app.use(({ dest: './uploads/', 
-    //     rename: function(fieldname, filename){
-    //         return filename
-    //     }
-    // }))
+// cloudinary.config({
+//     cloud_name: process.env.CLOUD_NAME,
+//     api_key: process.env.API_KEY,
+//     api_secret: process.env.API_SECRET
+// });
+
+// const storage = cloudinaryStorage({
+//     cloudinary: cloudinary,
+//     folder: "demo",
+//     allowedFormats: ["jpg", "png"],
+//     transformation: [{ width: 500, height: 500, crop: "limit" }]
+// });
+
+// const parser = multer({ storage: storage });
+
+// app.post('/api/images', parser.single("image"), (req, res) => {
+//     console.log(req.file) // to see what is returned to you
+//     const image = {};
+//     image.url = req.file.url;
+//     image.id = req.file.public_id;
+//     DonationModel.create(image) // save image information in database
+//       .then(newImage => res.json(newImage))
+//       .catch(err => console.log(err));
+// });
+
+
+   //secure
     app.get("/api/canigetthis", function (req, res) {
         res.send("You got the data. You are authenticated");
       });
-    app.get("/api/hey", function (req, res){
-        res.send(`${req.user._id}`)
-    })
 
     app.get('/api/careportal', function(req, res){
         res.send("You got care portal data")
     });
-    // app.get('/api/donations', function(req, res){
-    //     res.send(req.body)
-    // });
 
-    // app.post('/api/donations', upload.single('donation'), function (req, res, next) {
-    //     res.send(req.file, req.body)
-    //     // req.file is the `avatar` file
-    //     // req.body will hold the text fields, if there were any
-    // })
-      
-    // app.post('/donations', upload.single('photo'), function (req, res, next) {
-    //     // req.file is the `avatar` file
-    //     // req.body will hold the text fields, if there were any
-    // })
-    // app.use(multer({ dest: './uploads/',
-    //     rename: function(fieldname, filename){
-    //         return filename
-    //     },
-    // }));
-
+    
     app.get('*', function(req, res) {
         res.sendFile(path.join(__dirname + '/public/index.html'));
     });

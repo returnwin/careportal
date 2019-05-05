@@ -17,11 +17,13 @@ class DonationForm extends Component{
             category: "",
             title: "",
             desc: "",
-            donations: []
+            donations: [],
+            image: [
+                {data: "", contentType: ""}
+            ]
         }
     }
     componentDidMount(){
-        console.log(this.props.token)
         const token = this.props.token;
         fetch('/api/donations')
         .then(res => res.json())
@@ -51,7 +53,8 @@ class DonationForm extends Component{
         console.log("itemTitle:", itemTitle)
         const itemDesc = this.state.desc;
         console.log("itemDesc:", itemDesc)
-        const token = this.props.token;
+        const image = this.state.image;
+        console.log("image:", image)
         let options = {
             method: "POST",
             headers: {"Content-type": "application/json; charset=UTF-8"},
@@ -67,7 +70,9 @@ class DonationForm extends Component{
     }
     render(){
         return(
-            <form className="donationForm" onSubmit={this.handleFormSubmit.bind(this)}>
+            <div>
+            <h1>Donate an Item</h1>
+            <form className="donationForm" onSubmit={this.handleFormSubmit.bind(this)} enctype="multipart/form-data">
                 <FormGroup id='formName'>
                     <Label className="donationForm-name">Name:</Label>{' '}
                     <Input 
@@ -164,21 +169,16 @@ class DonationForm extends Component{
                         value={this.state.desc}
                     />
                 </FormGroup>
-                {/* <FormGroup>
-                    <Label for="exampleFile">File</Label>
-                    <Input type="file" name="file" id="exampleFile" />
-                    <FormText color="muted">
-                        Upload an Image
-                    </FormText>
-                </FormGroup> */}
+                {/* <form action='/api/images' method="post" enctype="multipart/form-data"> */}
+                <form action='/api/images' method="post" enctype="multipart/form-data">
+                    <Input type='file' name='image' onChange={e=>{
+                            this.setState({[e.target.name]: e.target.value});
+                        }}/>
+                </form>
+                {/* </form> */}
                 <Button type="submit">Submit</Button>
             </form>
-            // <div className="donation-form">
-            //     <form action="/api/donations" method="post" encType="multipart/form-data" id="addPhoto"> 
-            //         <input type="file" name="donation" />
-            //         <button type="submit" onSubmit={this.handleSubmit}>SAVE</button>
-            //     </form>
-            // </div>
+        </div>
         )
     }
 }

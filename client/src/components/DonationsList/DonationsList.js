@@ -12,7 +12,16 @@ class DonationsList extends Component {
       items: true,
       money: true,
       events: true,
+      donations: []
     };
+  }
+  componentDidMount(){
+    fetch('/api/donations')
+    .then(res => res.json())
+    .then(donations => {
+        console.log("donations:", donations)
+        this.setState({ donations })
+    })
   }
 
   filterDonations = () => {
@@ -34,6 +43,7 @@ class DonationsList extends Component {
   };
 
   render() {
+    const donations = this.state.donations;
     const filteredDonations = this.filterDonations();
     return (
       <div>
@@ -76,6 +86,7 @@ class DonationsList extends Component {
           </FormGroup>
         </div>
         {/* mapped cards */}
+        
         <ListGroup className="donations-list">
           {filteredDonations.map((donation, i) => (
             <ListGroupItem key={i}>

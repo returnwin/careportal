@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar/NavBar';
 import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import { Alert } from 'react-bootstrap';
 
-// import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   constructor() {
@@ -14,7 +14,7 @@ class App extends Component {
     this.state = {
       signUpSignInError: "",
       authenticated: true,
-      // authenticated: localStorage.getItem("token") || false,
+      authenticated: localStorage.getItem("token") || false,
       userId: "",
       images: []
     };

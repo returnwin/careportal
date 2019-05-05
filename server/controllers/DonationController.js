@@ -1,4 +1,11 @@
 const DonationModel = require("../models/DonationModel");
+const fs = require('fs');
+const express = require('express');
+const router = express.Router();
+// const imgPath = '/uploads/yourimage.png';
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
 
 module.exports.list = (req, res)=>{
     DonationModel.find({}).exec().then((donations)=>{
@@ -13,6 +20,8 @@ module.exports.show = (req, res)=>{
 }
 
 module.exports.create = (req, res)=>{
+    const imgPath = './uploads';
+    // console.log("REQ.BODY", req)
     const d = new DonationModel({
         userId: req.body.userId,
         name: req.body.name,
@@ -23,10 +32,22 @@ module.exports.create = (req, res)=>{
         itemDesc: req.body.itemDesc,
     });
     d.save().then(savedDonation =>{
-        console.log("savedDonation:", savedDonation)
         return res.json(savedDonation)
     })
+    // d.img.data = fs.readFileSync(imgPath);
+    // d.img.contentType = 'jpg';
+    
+
+    // d.save(function(err, d) {
+    //     if (err) return console.error(err);
+    //     console.log("donationImage:", d)
+    //     console.dir(d);
+    // })
+    // DonationModel.find({}, function(err,donationImage){
+    //     res.render('index',{ donationImage: donationImage });
+    // });
 }
+
 
 module.exports.update = (req, res)=>{
     DonationModel.findByIdAndUpdate(

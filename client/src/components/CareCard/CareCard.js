@@ -5,7 +5,6 @@ import { Card, CardText, CardBody, CardTitle, CardLink, CardImg, Badge } from 'r
 const CareCard = props => {
   // const { donation } = props;
   const { title, description, cardImg, location, date, socialUrl, label } = props.donation;
-
   return (
     <Card className="cards">
       <CardBody className="card-body no-padding">

@@ -5,27 +5,33 @@ import donations from '../../json/donations.json';
 // import ImageSubmit from '../ImageSubmit/ImageSubmit';
 import DonationForm from '../DonationForm/DonationForm';
 import CareCard from '../CareCard/CareCard';
-import donation from '../../json/donation.json';
+// import donation from '../../json/donation.json';
 // import PropTypes from 'prop-types';
 
 class WelcomePage extends Component{
     constructor(props){
         super(props);
         this.state = {
-            token: this.props.token
+            donations: []
         }
+    }
+    componentDidMount(){
+        fetch('/api/donations')
+        .then(res => res.json())
+        .then(donations => {
+            console.log("donations:", donations)
+            this.setState({ donations })
+        })
+        
     }
 
     render(){
-        console.log(this.state.token)
         return(
             <div className="welcomepage">
                 <DonationList
                     donations={donations}
-                >
-                </DonationList>
-                <DonationForm token={this.state.token}/>
-                {/* <ImageSubmit/> */}
+                />
+                <DonationForm/>
             </div>
         )
     }
