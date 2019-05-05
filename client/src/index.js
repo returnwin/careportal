@@ -4,6 +4,14 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 // import "bootstrap/dist/css/bootstrap.min.css";
+const oldFetch = window.fetch;
+window.fetch = (url, settings = {}) => {
+  return oldFetch(url, 
+    {...settings,
+      headers: {...settings.headers, authorization: localStorage.getItem("token")}
+    }
+    );
+};
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

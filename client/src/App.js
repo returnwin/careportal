@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import "./App.css";
-import donation from "./json/donation.json";
+// import React, { Component } from "react";
+// import "./App.css";
+// import donation from "./json/donation.json";
 
 import React, { Component } from 'react';
 import './App.css';
@@ -14,10 +14,10 @@ import WelcomePage from './components/WelcomePage/WelcomePage';
 import LoginPage from './components/LoginPage/LoginPage';
 import { Alert } from 'react-bootstrap';
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import WelcomePage from "./components/WelcomePage/WelcomePage";
-import LoginPage from "./components/LoginPage/LoginPage";
-import { Alert } from "react-bootstrap";
+// import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import WelcomePage from "./components/WelcomePage/WelcomePage";
+// import LoginPage from "./components/LoginPage/LoginPage";
+// import { Alert } from "react-bootstrap";
 
 class App extends Component {
   constructor() {

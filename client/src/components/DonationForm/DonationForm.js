@@ -23,13 +23,12 @@ class DonationForm extends Component{
     componentDidMount(){
         console.log(this.props.token)
         const token = this.props.token;
-        fetch('/api/donations', {
-        headers: {
-            Authorization: token
-        }
-        })
+        fetch('/api/donations')
         .then(res => res.json())
-        .then(donations => this.setState({ donations }))
+        .then(donations => {
+            console.log("donations:", donations)
+            this.setState({ donations })
+        })
     }
     handleFormSubmit(e){
         e.preventDefault();
@@ -55,7 +54,7 @@ class DonationForm extends Component{
         const token = this.props.token;
         let options = {
             method: "POST",
-            headers: {"Content-type": "application/json; charset=UTF-8","Authorization": `${token}`},
+            headers: {"Content-type": "application/json; charset=UTF-8"},
             body: JSON.stringify({name, location, itemType, itemTitle, itemDesc})
         }
         fetch("/api/donations", options).then((res)=>{
